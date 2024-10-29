@@ -14,3 +14,10 @@ package.json add scripts:
 can simply run 
   npm run typegen
 to extract and generate sanity types
+
+-> A package to ensure module can only be used on server components
+npm i server-only
+
+setting up sanity - Live content API
+->setup and config live.ts
+-> fetch posts using live API
