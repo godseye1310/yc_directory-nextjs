@@ -1,0 +1,16 @@
+
+To Generate sanity types :-
+-> Extract using:
+npx sanity@latest schema extract --path=./sanity/extract.json
+-> Generate using:
+npx sanity@latest typegen generate
+
+package.json add scripts:
+        scripts : {
+        "predev": "npm run typegen",
+		"prebuild": "npm run typegen",
+		"typegen": "sanity schema extract --path=./sanity/extract.json && sanity typegen generate"
+        }
+can simply run 
+  npm run typegen
+to extract and generate sanity types
