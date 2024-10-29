@@ -13,7 +13,7 @@ export default async function Home({
 
 	const posts = await client.fetch(STARTUPS_QUERY);
 
-	console.log(posts, null, 2);
+	// console.log(posts, null, 2);
 
 	return (
 		<>
