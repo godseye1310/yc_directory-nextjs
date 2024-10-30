@@ -1,6 +1,7 @@
 Add Tailwind Plugins
 > npm install tailwindcss-animate @tailwindcss/typography
 
+// Setup Auth using Next Auth. OAuth - Provider[github]
 
 Using Shadcn ui :
 > npx shadcn@latest init
@@ -24,6 +25,19 @@ To Generate sanity types :-
 > npx sanity@latest schema extract --path=./sanity/extract.json
 -> Generate using:
 > npx sanity@latest typegen generate
+
+In Sanity we setup the following
+// creating sanity dataSchemas
+// configuring sanity.config.ts .envs & structure.ts according to necessity.
+// writing queries to fetch data from db.
+
+//lib folder Sanity API's
+live API
+client.ts
+queries.ts
+write-client.ts // to create & update data
+
+
 
 package.json add scripts:
         scripts : {
@@ -57,3 +71,15 @@ experimental: {
 
 in the page.tsx
 -export const experimental_ppr = true;
+
+
+
+//
+Home Page StartUps is Fetched LIVE API. (SSR)
+
+//
+In Startup Details Page utlising Partial Pre-Rendering (PPR) :
+-> All Startup Details is cached and [useCdn:true] in sanity client.ts 
+   (revalidates the page every 60 seconds).
+-> Hence, the Details Page all data updates are updated in Incremental Static Regeneration (ISR) Fashion.
+-> But the Views count is using - Server Side Rendering (SSR), providing Fresh Data with each user Requests.
