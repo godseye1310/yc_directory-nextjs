@@ -7,6 +7,8 @@ Using Shadcn ui :
 
 To add a shadcn components (button) :
 > npx shadcn@latest add button
+// (skeleton)
+> npx shadcn@latest add skeleton
 
 Setup SANITY in Next.js 
 (copy command from when created a sanity Project)
@@ -39,3 +41,19 @@ to extract and generate sanity types
 setting up sanity - Live content API
 ->setup and config live.ts
 -> fetch posts using live API
+
+using experimental feature PPR in startup details Page
+
+next.config.ts
+
+experimental: {
+		ppr: "incremental",
+	},
+	devIndicators: {
+		appIsrStatus: true,
+		buildActivity: true,
+		buildActivityPosition: "bottom-right",
+	},
+
+in the page.tsx
+-export const experimental_ppr = true;
