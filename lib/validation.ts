@@ -7,7 +7,7 @@ export const formSchema = z.object({
 		.max(50),
 	description: z
 		.string()
-		.min(10, { message: "Description must be at least 10 characters long" })
+		.min(15, { message: "Description must be at least 10 characters long" })
 		.max(300),
 	category: z.string().min(3).max(20),
 	link: z
@@ -17,7 +17,7 @@ export const formSchema = z.object({
 			try {
 				const res = await fetch(url, { method: "HEAD" });
 				const contentType = res.headers.get("content-type");
-				return contentType && contentType?.startsWith("image/");
+				return contentType?.startsWith("image/");
 			} catch {
 				return false;
 			}

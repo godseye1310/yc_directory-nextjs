@@ -30,6 +30,8 @@ const StartupForm = () => {
 
 			await formSchema.parseAsync(formValues);
 
+			console.log(formValues);
+
 			//   const result = await createPitch(prevState, formData, pitch);
 
 			//   if (result.status == "SUCCESS") {
@@ -44,8 +46,10 @@ const StartupForm = () => {
 			//   return result;
 		} catch (error) {
 			if (error instanceof z.ZodError) {
+				//getting access to the field errors
 				const fieldErorrs = error.flatten().fieldErrors;
 
+				//setting errors (typesafe)
 				setErrors(fieldErorrs as unknown as Record<string, string>);
 
 				toast({
@@ -54,6 +58,7 @@ const StartupForm = () => {
 					variant: "destructive",
 				});
 
+				//returning error
 				return {
 					...prevState,
 					error: "Validation failed",
@@ -61,6 +66,7 @@ const StartupForm = () => {
 				};
 			}
 
+			// Handling an unexpected error
 			toast({
 				title: "Error",
 				description: "An unexpected error has occurred",
