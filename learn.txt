@@ -82,4 +82,12 @@ In Startup Details Page utlising Partial Pre-Rendering (PPR) :
 -> All Startup Details is cached and [useCdn:true] in sanity client.ts 
    (revalidates the page every 60 seconds).
 -> Hence, the Details Page all data updates are updated in Incremental Static Regeneration (ISR) Fashion.
--> But the Views count is using - Server Side Rendering (SSR), providing Fresh Data with each user Requests.
+
+// useActionState Hook
+const [state, formAction, isPending] = useActionState(handleFormSubmit, {
+		error: "",
+		status: "INITIAL",
+	});
+
+set formSchema to do validation with Zod
+ made a server action to handle creating new startup's
