@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { formateDate } from "@/lib/utils";
 import { Author, Startup } from "@/sanity/types";
 import { EyeIcon } from "lucide-react";
@@ -45,11 +46,11 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
 
 				<Link href={`/user/${author?._id}`}>
 					<Image
-						src="https://placehold.co/48x48"
-						alt="placeholder"
+						src={author?.image!}
+						alt={author?.name!}
 						width={48}
 						height={48}
-						className="rounded-full"
+						className="rounded-full !aspect-square object-cover"
 					/>
 				</Link>
 			</div>
@@ -72,6 +73,18 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
 				</Button>
 			</div>
 		</li>
+	);
+};
+
+export const StartupCardSkeleton = () => {
+	return (
+		<>
+			{Array(6)
+				.fill(0)
+				.map((_, index) => (
+					<Skeleton key={index} className="startup-card_skeleton" />
+				))}
+		</>
 	);
 };
 
