@@ -1,7 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import { formateDate } from "@/lib/utils";
 import { client } from "@/sanity/lib/client";
-import { STARTUP_DATA_BY_ID_QUERY } from "@/sanity/lib/queries";
+import {
+	PLAYLIST_BY_SLUG_QUERY,
+	STARTUP_DATA_BY_ID_QUERY,
+} from "@/sanity/lib/queries";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -10,6 +13,7 @@ import markdownit from "markdown-it";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import View from "@/components/View";
+import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
 
 const md = markdownit();
 
@@ -18,7 +22,20 @@ export const experimental_ppr = true;
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 	const { id } = await params;
 
-	const post = await client.fetch(STARTUP_DATA_BY_ID_QUERY, { id });
+	// Implementing Parallel fetch
+	const [post, { select: editorPicks }] = await Promise.all([
+		client.fetch(STARTUP_DATA_BY_ID_QUERY, { id }),
+		client.fetch(PLAYLIST_BY_SLUG_QUERY, {
+			slug: "editor-picks",
+		}),
+	]);
+
+	// Sequential fetch
+	// const post = await client.fetch(STARTUP_DATA_BY_ID_QUERY, { id });
+
+	// const { select: editorPicks } = await client.fetch(PLAYLIST_BY_SLUG_QUERY, {
+	// 	slug: "editor-picks",
+	// });
 
 	if (!post) return notFound();
 
@@ -80,6 +97,21 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 				<hr className="divider" />
 
 				{/* TODO: Editor SELECTED STARTUPS */}
+				{editorPicks?.length > 0 && (
+					<div className="max-w-4xl mx-auto">
+						<p className="text-30-semibold !text-primary underline underline-offset-4 uppercase">
+							Editor Pick's
+						</p>
+
+						<ul className="mt-7 card_grid-sm">
+							{editorPicks.map(
+								(post: StartupTypeCard, i: number) => (
+									<StartupCard key={i} post={post} />
+								)
+							)}
+						</ul>
+					</div>
+				)}
 
 				<Suspense fallback={<Skeleton className="view_skeleton" />}>
 					<View id={id} />

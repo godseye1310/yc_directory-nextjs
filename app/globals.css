@@ -185,6 +185,15 @@
 		@apply bg-primary border-[4px] border-black rounded-full p-5 min-h-[70px] w-full font-bold text-[18px] !important;
 	}
 
+	/* Toast */
+	.toast-success {
+		@apply bg-green-500 text-white border border-green-700;
+	}
+
+	.toast-error {
+		@apply bg-red-500 text-white border border-red-700;
+	}
+
 	/* view */
 	.view-container {
 		@apply flex justify-end items-center mt-5 fixed bottom-3 right-3;

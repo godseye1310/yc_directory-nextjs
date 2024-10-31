@@ -39,6 +39,8 @@ const StartupForm = () => {
 					title: "Success",
 					description:
 						"Your startup pitch has been created successfully",
+					className:
+						"bg-green-500 text-white border border-green-700",
 				});
 
 				// Redirecting to that startup's detail page.
@@ -58,6 +60,7 @@ const StartupForm = () => {
 					title: "Error",
 					description: "Please check your inputs and try again",
 					variant: "destructive",
+					className: "bg-red-500 text-white border border-red-700",
 				});
 
 				//returning error
@@ -73,6 +76,7 @@ const StartupForm = () => {
 				title: "Error",
 				description: "An unexpected error has occurred",
 				variant: "destructive",
+				className: "bg-red-500 text-white border border-red-700",
 			});
 
 			return {
