@@ -100,7 +100,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 				{editorPicks?.length > 0 && (
 					<div className="max-w-4xl mx-auto">
 						<p className="text-30-semibold !text-primary underline underline-offset-4 uppercase">
-							Editor Pick's
+							Editor Pick&apos;s
 						</p>
 
 						<ul className="mt-7 card_grid-sm">
