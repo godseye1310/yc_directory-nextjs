@@ -30,6 +30,11 @@ const items = [
 		url: "/documentation/Rendering_RealTime-Updates",
 		icon: FileCode,
 	},
+	{
+		title: "Parsing MD Files for Docs",
+		url: "/documentation/parsing-md-Files-for-Docs",
+		icon: FileText,
+	},
 ];
 
 const DocSidebar = () => {

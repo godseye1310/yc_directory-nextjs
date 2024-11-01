@@ -62,6 +62,18 @@ const DocsPage = () => {
 						</p>
 					</div>
 				</Link>
+
+				<Link href="/documentation/parsing-md-Files-for-Docs">
+					<div className="p-6 border rounded-lg shadow-sm hover:shadow-lg transition-shadow bg-white">
+						<h2 className="text-2xl font-semibold text-blue-600">
+							Parsing MD Files for Docs
+						</h2>
+						<p className="mt-2 text-gray-700">
+							Explore how to parse and render Markdown files in
+							Next.js for documentation.
+						</p>
+					</div>
+				</Link>
 			</section>
 		</div>
 	);
