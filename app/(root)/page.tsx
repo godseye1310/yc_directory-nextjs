@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+// import { auth } from "@/auth";
 import SearchForm from "@/components/Search/SearchForm";
 import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
 // import { client } from "@/sanity/lib/client";
@@ -14,10 +14,14 @@ export default async function Home({
 	const { query } = await searchParams;
 	const params = { search: query || null };
 
-	const session = await auth();
+	// const session = await auth();
 	// console.log(session?.id);
 
+	// we are not using client.fetch ISR
+	//caching Startups using ISR revalidates every 60 seconds if useCdn is true while if useCdn is false it will revalidate on every request (page reload)
 	// const posts = await client.fetch(STARTUPS_QUERY);
+
+	// Fetching newly created startups LIVE using SANATY Live API showing Real-Time Updates
 	const { data: posts } = await sanityFetch({
 		query: STARTUPS_QUERY,
 		params,
