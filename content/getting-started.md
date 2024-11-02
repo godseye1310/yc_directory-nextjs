@@ -30,7 +30,7 @@
 
 <a href="https://youtu.be/Zq5fmkH0T78?feature=shared" target="_blank"><img src="https://github.com/sujatagunale/EasyRead/assets/151519281/1736fca5-a031-4854-8c09-bc110e3bc16d" /></a>
 
-## <a name="introduction">🤖 Introduction</a>
+## <a id="introduction">🤖 Introduction</a>
 
 A Next.js 15 platform where entrepreneurs can submit their startup ideas for virtual pitch competitions, browse other
 pitches, and gain exposure through a clean minimalistic design for a smooth user experience.
@@ -455,16 +455,23 @@ export function formatNumber(number: number) {
 </details>
 
 <details>
-<summary><code>lib/validation.ts</code></summary>
+
+[Check server Side Validation docs](#validation)
+
+<summary><code>lib/validation.ts <a href="#validation">check validation docs for more details</a> </code></summary>
 
 ```typescript
+import { validateImageURL } from "@/lib/actions";
 import { z } from "zod";
 
 export const formSchema = z.object({
-	title: z.string().min(3, "Title is required").max(100, "Title is too long"),
+	title: z
+		.string()
+		.min(3, "Title must be at least 3 characters long")
+		.max(100, "Title is too long"),
 	description: z
 		.string()
-		.min(20, "Description should be at least 20 characters")
+		.min(10, "Description should be at least 10 characters")
 		.max(500, "Description is too long. Max 500 characters at most"),
 	category: z
 		.string()
@@ -473,16 +480,10 @@ export const formSchema = z.object({
 	link: z
 		.string()
 		.url("Invalid Image URL")
-		.refine(async (url) => {
-			try {
-				const res = await fetch(url, { method: "HEAD" });
-				const contentType = res.headers.get("content-type");
-				return contentType?.startsWith("image/");
-			} catch {
-				return false;
-			}
-		}, "URL must be a valid image"),
-	pitch: z.string().min(10, "Pitch should be at least 10 characters"),
+		.refine(async (url) => await validateImageURL(url), {
+			message: "URL must be a valid image",
+		}),
+	pitch: z.string().min(15, "Pitch should be at least 15 characters"),
 });
 ```
 

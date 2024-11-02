@@ -35,6 +35,11 @@ const items = [
 		url: "/documentation/parsing-md-Files-for-Docs",
 		icon: FileText,
 	},
+	{
+		title: "Validations (Image URLs validtion in Form)",
+		url: "/documentation/imageURL-validation_inForm",
+		icon: FileText,
+	},
 ];
 
 const DocSidebar = () => {

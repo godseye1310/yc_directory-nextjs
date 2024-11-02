@@ -88,6 +88,21 @@ const DocsPage = () => {
 						</p>
 					</div>
 				</Link>
+
+				<Link
+					id="validation"
+					href="/documentation/imageURL-validation_inForm"
+				>
+					<div className="p-6 border rounded-lg shadow-sm hover:shadow-lg transition-shadow bg-white">
+						<h2 className="text-2xl font-semibold text-blue-600">
+							Server Side Validation
+						</h2>
+						<p className="mt-2 text-gray-700">
+							Form Validation (for image URLs) in Next.js and Zod
+							for server side validation.
+						</p>
+					</div>
+				</Link>
 			</section>
 
 			<section>
