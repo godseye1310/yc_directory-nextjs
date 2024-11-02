@@ -10,7 +10,7 @@ const DocumentationPage = async ({
 	const content = parseMarkdown(doc);
 
 	return (
-		<section className="section_container">
+		<section className="max-w-4xl mx-auto p-6">
 			<h1>{doc.charAt(0).toUpperCase() + doc.slice(1)}</h1>
 			<article
 				dangerouslySetInnerHTML={{ __html: content }}

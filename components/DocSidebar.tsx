@@ -51,6 +51,11 @@ const DocSidebar = () => {
 									<SidebarMenuButton
 										asChild
 										isActive={pathname === item.url} // Set isActive based on current pathname
+										className={
+											pathname === item.url
+												? "active-link"
+												: "link"
+										}
 									>
 										<Link href={item.url}>
 											<item.icon />

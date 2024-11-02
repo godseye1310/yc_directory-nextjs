@@ -2,11 +2,13 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+```
 "dependencies": {
 "react": "19.0.0-rc-69d4b800-20241021",
 "react-dom": "19.0.0-rc-69d4b800-20241021",
-"next": "15.0.1"
+"next": "^15.0.3-canary.1"
 }
+```
 
 First, run the development server:
 

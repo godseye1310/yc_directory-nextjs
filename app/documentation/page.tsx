@@ -1,9 +1,23 @@
+// import { parseMarkdown } from "@/lib/markdownParser";
 import Link from "next/link";
 import React from "react";
 
+import { readFileSync } from "fs";
+import path from "path";
+import MarkdownIt from "markdown-it";
+
+const md = new MarkdownIt({ html: true });
+
 const DocsPage = () => {
+	// const content = parseMarkdown("getting-started");
+	const filePath = path.join(process.cwd(), "content", `getting-started.md`);
+	console.log(filePath);
+	const filecontents = readFileSync(filePath, "utf-8");
+	// console.log(filecontents);
+	const parsedContent = md.render(filecontents);
+
 	return (
-		<div className="max-w-4xl mx-auto p-6">
+		<main className="max-w-4xl mx-auto p-6">
 			<header className="text-center mb-10">
 				<h1 className="text-4xl font-bold text-gray-900 mb-4">
 					Welcome to the Documentation
@@ -75,7 +89,14 @@ const DocsPage = () => {
 					</div>
 				</Link>
 			</section>
-		</div>
+
+			<section>
+				<article
+					dangerouslySetInnerHTML={{ __html: parsedContent }}
+					className="prose max-w-4xl font-work-sans "
+				/>
+			</section>
+		</main>
 	);
 };
 

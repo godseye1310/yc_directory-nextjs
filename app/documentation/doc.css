@@ -1,0 +1,43 @@
+body {
+	scroll-behavior: smooth !important;
+}
+
+.prose code {
+	background-color: rgba(
+		0,
+		0,
+		0,
+		0.1
+	) !important; /* Light background to highlight code */
+	border-radius: 4px; /* Rounded corners */
+	padding: 0.2em 0.4em; /* Padding around the text */
+	color: #333; /* Text color */
+	font-family: monospace; /* Monospace font */
+	font-weight: normal; /* Normal font weight */
+	font-size: 0.9em; /* Adjust size as needed */
+}
+
+.prose pre code {
+	background-color: transparent !important;
+	color: whitesmoke !important;
+}
+
+.link {
+	color: gray; /* Default link color */
+	padding: 10px;
+	text-decoration: none;
+	display: flex; /* Use flex for icon and text alignment */
+	align-items: center; /* Center items vertically */
+}
+
+.link:hover {
+	color: rgb(37 99 235); /* Hovered link color */
+}
+
+.active-link {
+	color: rgb(37 99 235) !important; /* Active link color */
+	font-weight: bold; /* Bold text for active link */
+	background-color: aliceblue !important;
+	/* Optional background for emphasis */
+	border-radius: 4px; /* Rounded corners */
+}

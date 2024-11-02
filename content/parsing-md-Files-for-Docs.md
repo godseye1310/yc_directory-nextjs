@@ -4,18 +4,19 @@ This file, `lib/markdownParser.ts`, is responsible for reading Markdown files fr
 
 ## Code in `lib/markdownParser.ts`
 
-````typescript
-import { readFileSync } from 'fs';
-import path from 'path';
-import MarkdownIt from 'markdown-it';
+```typescript
+import { readFileSync } from "fs";
+import path from "path";
+import MarkdownIt from "markdown-it";
 
 const md = new MarkdownIt();
 
 export const parseMarkdown = (doc: string): string => {
-  const filePath = path.join(process.cwd(), 'content', `${doc}.md`);
-  const content = readFileSync(filePath, 'utf-8');
-  return md.render(content);
+	const filePath = path.join(process.cwd(), "content", `${doc}.md`);
+	const content = readFileSync(filePath, "utf-8");
+	return md.render(content);
 };
+```
 
 ## Detailed Explanation of Each Part
 
@@ -24,10 +25,10 @@ Let’s go through this line-by-line to understand each part and how it contribu
 ### 1. Importing Necessary Modules
 
 ```typescript
-import { readFileSync } from 'fs';
-import path from 'path';
-import MarkdownIt from 'markdown-it';
-````
+import { readFileSync } from "fs";
+import path from "path";
+import MarkdownIt from "markdown-it";
+```
 
 Importing the `readFileSync` and `path` modules from the `fs` module, and the `MarkdownIt` module from the `markdown-it` library.
 

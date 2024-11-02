@@ -2,7 +2,12 @@
 import { ReactNode } from "react";
 
 import DocSidebar from "@/components/DocSidebar";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import {
+	SidebarInset,
+	SidebarProvider,
+	SidebarTrigger,
+} from "@/components/ui/sidebar";
+import "./doc.css";
 
 const DocumentationLayout = ({ children }: { children: ReactNode }) => {
 	return (
@@ -10,7 +15,9 @@ const DocumentationLayout = ({ children }: { children: ReactNode }) => {
 			<DocSidebar />
 			<SidebarInset>
 				<main className="">
-					{/* <SidebarTrigger /> */}
+					<div className="sticky top-3 z-50 md:hidden">
+						<SidebarTrigger />
+					</div>
 					{children}
 				</main>
 			</SidebarInset>
