@@ -63,12 +63,14 @@ export const AUTHOR_BY_GITHUB_ID_QUERY = defineQuery(`
 export const AUTHOR_BY_ID_QUERY = defineQuery(`
   *[_type == 'author' && _id == $id][0]{
   _id,
-  id, 
+  id,
+  _createdAt,
   name,
   username,
   email,
   image,
-  bio
+  bio,
+  "startupCount": count(*[_type == "startup" && author._ref == ^._id])
 }`);
 
 export const STARTUPS_BY_USER_QUERY = defineQuery(`

@@ -23,7 +23,7 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
 	return (
 		<li className="startup-card group">
 			<div className="flex-between">
-				<p className="startup_card_date">{formateDate(_createdAt)}</p>
+				<p className="startup-card_date">{formateDate(_createdAt)}</p>
 				<div className="flex gap-1.5">
 					<EyeIcon className="size-6 text-primary" />
 					<span className="text-16-medium">{views}</span>
@@ -44,13 +44,13 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
 					</Link>
 				</div>
 
-				<Link href={`/user/${author?._id}`}>
+				<Link href={`/user/${author?._id}`} className="!aspect-square">
 					<Image
 						src={author?.image!}
 						alt={author?.name!}
 						width={48}
 						height={48}
-						className="rounded-full !aspect-square object-cover"
+						className="rounded-full !aspect-square object-cover bg-zinc-600 border border-neutral-300/90"
 					/>
 				</Link>
 			</div>
