@@ -21,6 +21,8 @@ const View = async ({ id }: { id: string }) => {
 				.commit()
 	);
 
+	// console.log(totalViews);
+
 	return (
 		<div className="view-container ">
 			<div className="absolute -top-2 -right-2">
@@ -29,7 +31,7 @@ const View = async ({ id }: { id: string }) => {
 			<p className="view-text">
 				<span className="font-black flex gap-3 items-center">
 					<Eye strokeWidth={3} className="text-primary size-5" />
-					<span>{totalViews}</span>
+					<span>{totalViews ? `${totalViews + 1}` : 0}</span>
 				</span>
 			</p>
 		</div>

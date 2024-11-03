@@ -70,3 +70,17 @@ export const createPitch = async (
 		});
 	}
 };
+
+// server action to do server side Image URL validation.
+export async function validateImageURL(url: string): Promise<boolean> {
+	try {
+		const response = await fetch(url, { method: "HEAD" });
+		// console.log(response);
+		const contentType = response.headers.get("content-type");
+		console.log("contentType", contentType);
+		return contentType?.startsWith("image/") ?? false;
+	} catch (error) {
+		console.error("Error validating image URL:", error);
+		return false;
+	}
+}

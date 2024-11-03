@@ -78,7 +78,10 @@ const DocSidebar = () => {
 					<SidebarGroupContent>
 						<SidebarMenu>
 							<SidebarMenuItem>
-								<SidebarMenuButton asChild>
+								<SidebarMenuButton
+									asChild
+									className="hover:text-primary hover:bg-primary/30 font-semibold"
+								>
 									<Link href="/">
 										<HomeIcon className="text-primary" />
 										<span>Home</span>

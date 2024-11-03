@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import React, { useState, useActionState } from "react";
@@ -10,7 +11,7 @@ import { formSchema } from "@/lib/validation";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
-import { createPitch } from "@/lib/actions";
+import { createPitch, validateImageURL } from "@/lib/actions";
 
 const StartupForm = () => {
 	const [errors, setErrors] = useState<Record<string, string>>({});
@@ -18,18 +19,35 @@ const StartupForm = () => {
 	const { toast } = useToast();
 	const router = useRouter();
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const handleFormSubmit = async (prevState: any, formData: FormData) => {
+		const formValues = {
+			title: formData.get("title") as string,
+			description: formData.get("description") as string,
+			category: formData.get("category") as string,
+			link: formData.get("link") as string,
+			pitch,
+		};
 		try {
-			const formValues = {
-				title: formData.get("title") as string,
-				description: formData.get("description") as string,
-				category: formData.get("category") as string,
-				link: formData.get("link") as string,
-				pitch,
-			};
-
 			await formSchema.parseAsync(formValues);
 			// console.log(formValues);
+
+			// const isImageValid = await validateImageURL(formValues.link);
+			// if (!isImageValid) {
+			// 	setErrors((prevErrors) => ({
+			// 		link: "Invalid image URL",
+			// 	}));
+
+			// can display error toast
+
+			// 	// Return early with an error status
+			// 	return {
+			// 		...prevState,
+			// 		error: "Invalid image URL",
+			// 		status: "ERROR",
+			// 		values: formValues,
+			// 	};
+			// }
 
 			const result = await createPitch(prevState, formData, pitch);
 
@@ -39,16 +57,20 @@ const StartupForm = () => {
 					title: "Success",
 					description:
 						"Your startup pitch has been created successfully",
-					className:
-						"bg-green-500 text-white border border-green-700",
+					variant: "success",
+					duration: 3000,
 				});
 
+				setPitch("");
 				// Redirecting to that startup's detail page.
 				router.push(`/startup/${result._id}`);
 			}
 
 			return result;
 		} catch (error) {
+			// console.log("formValues :", formValues);
+			// console.log(error);
+
 			if (error instanceof z.ZodError) {
 				//getting access to the field errors
 				const fieldErorrs = error.flatten().fieldErrors;
@@ -59,8 +81,8 @@ const StartupForm = () => {
 				toast({
 					title: "Error",
 					description: "Please check your inputs and try again",
-					variant: "destructive",
-					className: "bg-red-500 text-white border border-red-700",
+					variant: "error",
+					duration: 3000,
 				});
 
 				//returning error
@@ -68,6 +90,7 @@ const StartupForm = () => {
 					...prevState,
 					error: "Validation failed",
 					status: "ERROR",
+					values: formValues,
 				};
 			}
 
@@ -75,8 +98,8 @@ const StartupForm = () => {
 			toast({
 				title: "Error",
 				description: "An unexpected error has occurred",
-				variant: "destructive",
-				className: "bg-red-500 text-white border border-red-700",
+				variant: "error",
+				duration: 3000,
 			});
 
 			return {
@@ -90,6 +113,12 @@ const StartupForm = () => {
 	const [state, formAction, isPending] = useActionState(handleFormSubmit, {
 		error: "",
 		status: "INITIAL",
+		values: {
+			title: "",
+			description: "",
+			category: "",
+			link: "",
+		},
 	});
 
 	return (
@@ -101,6 +130,7 @@ const StartupForm = () => {
 				<Input
 					id="title"
 					name="title"
+					defaultValue={state.values.title}
 					className="startup-form_input"
 					required
 					placeholder="Startup Title"
@@ -118,6 +148,7 @@ const StartupForm = () => {
 				<Textarea
 					id="description"
 					name="description"
+					defaultValue={state.values.description}
 					className="startup-form_textarea"
 					required
 					placeholder="Startup Description"
@@ -135,6 +166,7 @@ const StartupForm = () => {
 				<Input
 					id="category"
 					name="category"
+					defaultValue={state.values.category}
 					className="startup-form_input"
 					required
 					placeholder="Startup Category (Tech, Health, Education...)"
@@ -152,6 +184,7 @@ const StartupForm = () => {
 				<Input
 					id="link"
 					name="link"
+					defaultValue={state.values.link}
 					className="startup-form_input"
 					required
 					placeholder="Startup Image URL"
@@ -190,11 +223,14 @@ const StartupForm = () => {
 
 			<Button
 				type="submit"
-				className="startup-form_btn text-white"
+				className="startup-form_btn text-white active:scale-95 inline-block"
 				disabled={isPending}
 			>
-				{isPending ? "Submitting..." : "Submit Your Pitch"}
-				<Send className="size-6 ml-2" />
+				<span className="flex gap-2 items-center justify-center transition duration-200 ease-in-out">
+					{isPending ? "Submitting..." : "Submit Your Pitch"}
+
+					<Send className="size-6 ml-2" />
+				</span>
 			</Button>
 		</form>
 	);

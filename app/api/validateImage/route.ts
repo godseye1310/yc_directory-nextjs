@@ -16,9 +16,14 @@ export async function GET(request: Request) {
 		);
 	}
 
+	console.log("valid url : ", url);
+
 	try {
 		const response = await fetch(url, { method: "HEAD" });
+		// console.log(response);
 		const contentType = response.headers.get("content-type");
+
+		console.log("contentType : ", contentType);
 
 		if (response.ok && contentType?.startsWith("image/")) {
 			return NextResponse.json({ valid: true });
