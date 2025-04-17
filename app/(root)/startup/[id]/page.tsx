@@ -14,6 +14,7 @@ import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import View from "@/components/View";
 import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
+import ArticleScrollProgress from "@/components/ArticleScrollProgress";
 
 const md = markdownit({ html: true });
 
@@ -43,6 +44,8 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
 	return (
 		<>
+			<ArticleScrollProgress />
+
 			<section className="pink_container !min-h-[230px]">
 				<p className="tag">{formateDate(post?._createdAt)}</p>
 				<h1 className="text-16-medium heading">{post.title}</h1>
